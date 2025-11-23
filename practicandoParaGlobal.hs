@@ -193,7 +193,7 @@ procesarClave (x:xs) = x : procesarClave ( filter (/=x) xs )
 
 -- 2. Devuelve el alfabeto completo cifrado, agregando las letras que no están en la clave.
 alfabetoIngles :: String
-alfabetoIngles = "ABCDEFGHIJKLMNOPKRSTUVWXYZ"
+alfabetoIngles = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 alfabetoCifrado :: String -> String
 alfabetoCifrado clave = procesarClave (clave ++ alfabetoIngles)
@@ -206,12 +206,20 @@ buscarPosicion c (x:xs)
    | otherwise = 1 + buscarPosicion c xs
 
 cifrar :: String -> String -> String
-cifrar = undefined
+cifrar clave mensaje = cifrarRecursivo mensaje
+    where
+    alfabetoIngles = "ABCDEFGHIJKLMNOPQKRSTUVWXYZ"
+    alfabetoNuevo = alfabetoCifrado clave
 
+    cifrarRecursivo :: String -> String
+    cifrarRecursivo [] = []
+    cifrarRecursivo (x:xs)
+        |elem x alfabetoIngles = (alfabetoNuevo !! buscarPosicion x alfabetoIngles) : cifrarRecursivo xs
+        |otherwise = x : cifrarRecursivo xs
 
 
 -- 4. Devuelve el mensaje original.
-descifrar :: String -> String -> String
-descifrar = undefined
+--descifrar :: String -> String -> String
+--descifrar = undefined
 
---esto es una prueba para usar git
+
