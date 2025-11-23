@@ -1,0 +1,91 @@
+###############################################
+#          GUIA RÁPIDA GIT + GITHUB           #
+#        (Uso diario, simple y práctica)       #
+###############################################
+
+# ---------------------------------------------
+# 1) INICIAR UN PROYECTO NUEVO
+# ---------------------------------------------
+# Ejecutar estos comandos una sola vez por proyecto:
+
+git init                     # Inicia Git en la carpeta
+git add .                    # Agrega todos los archivos al commit
+git commit -m "primer commit"    # Crea el primer commit
+git remote add origin URL_DEL_REPO   # Conecta con GitHub
+git branch -M main           # Cambia la rama principal a 'main'
+git push -u origin main      # Sube el proyecto por primera vez
+
+
+# ---------------------------------------------
+# 2) ACTUALIZAR TU PROYECTO (ANTES DE TRABAJAR)
+# ---------------------------------------------
+# Siempre hacer pull antes de empezar en cualquier PC:
+
+git pull                     # Trae los cambios desde GitHub
+
+
+# ---------------------------------------------
+# 3) GUARDAR Y SUBIR CAMBIOS (DESPUÉS DE TRABAJAR)
+# ---------------------------------------------
+git add .                    # Marca los archivos modificados
+git commit -m "descripcion del cambio"   # Guarda una foto del avance
+git push                     # Sube los cambios a GitHub
+
+
+# ---------------------------------------------
+# 4) VER EL ESTADO DEL PROYECTO
+# ---------------------------------------------
+git status                   # Muestra qué cambió y qué falta agregar
+
+
+# ---------------------------------------------
+# 5) DESCARTAR CAMBIOS HECHOS SIN QUERER
+# ---------------------------------------------
+git restore archivo          # Revierte SOLO un archivo
+git restore .                # Revierte TODOS los cambios sin commitear
+
+
+# ---------------------------------------------
+# 6) SI GIT NO TE DEJA HACER PUSH
+# ---------------------------------------------
+# Mensaje típico: "rejected... please pull first"
+
+git pull                     # Trae los cambios remotos
+# Resolver conflictos (si pasan) y luego:
+git push
+
+
+# ---------------------------------------------
+# 7) USO EN UNA SEGUNDA COMPUTADORA
+# ---------------------------------------------
+# Primera vez:
+git clone URL_DEL_REPO       # Baja todo el proyecto
+
+# Luego para trabajar:
+git pull                     # Trae cambios nuevos
+git add .                    # Marca cambios
+git commit -m "cambios"      # Guarda cambios
+git push                     # Sube cambios
+
+
+# ---------------------------------------------
+# 8) COMANDOS EXTRA ÚTILES
+# ---------------------------------------------
+git log --oneline            # Ver historial resumido
+git diff                     # Ver cambios en detalle
+git checkout rama            # Cambiar de rama (si lo necesitás)
+
+
+# ---------------------------------------------
+# REGLAS DE ORO
+# ---------------------------------------------
+# 1. Siempre hacé: git pull antes de tocar nada
+# 2. Siempre hacé: git push cuando terminás
+# 3. Nunca mezcles carpetas manualmente
+# 4. Hacé commits pequeños y frecuentes
+# 5. Si algo falla, no entres en pánico: casi todo se corrige
+
+
+###############################################
+# FIN DE LA GUÍA — PEGAR Y USAR SIN MIEDO :)
+###############################################
