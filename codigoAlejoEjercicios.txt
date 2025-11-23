@@ -1,0 +1,70 @@
+codigoCesar::String->Int->String
+codigoCesar [] _ = []
+codigoCesar (c:cs) n = (desplazar c n) : codigoCesar cs n
+
+desplazar::Char->Int->Char
+desplazar c n
+ |isUpper c = devElem aBC (mod ((devPos aBC c) + n-1) 26 +1)
+ |isLower c = devElem abc (mod ((devPos abc c) + n-1) 26 +1)
+ |otherwise = c
+ where 
+ abc = ['a','b'..'z']
+ aBC = ['A','B'..'Z']
+
+
+devPos::String->Char->Int
+devPos [] _ = error "no esta en la lista"
+devPos (x:xs) c
+ |c==x = 1
+ |otherwise = 1 + devPos xs c
+
+devElem::String->Int->Char
+devElem [] _ = error "no existe elemento en la pos"
+devElem (x:xs) n
+ |n==1 = x
+ |otherwise = devElem xs (n-1)
+
+---------------------------------------
+---------------------------------------
+
+codigoCesar::String->Int->String
+codigoCesar [] _ = []
+codigoCesar (c:cs) n = (desplazar c n) : codigoCesar cs n
+
+desplazar::Char->Int->Char
+desplazar c n
+ |isUpper c = devElem aBC (mod ((devPos aBC c) + n-1) 26 +1)
+ |isLower c = devElem abc (mod ((devPos abc c) + n-1) 26 +1)
+ |otherwise = c
+ where 
+ abc = reverse ['a','b'..'z']
+ aBC = reverse ['A','B'..'Z']
+
+
+devPos::String->Char->Int
+devPos [] _ = error "no esta en la lista"
+devPos (x:xs) c
+ |c==x = 1
+ |otherwise = 1 + devPos xs c
+
+devElem::String->Int->Char
+devElem [] _ = error "no existe elemento en la pos"
+devElem (x:xs) n
+ |n==1 = x
+ |otherwise = devElem xs (n-1)
+
+============================
+
+o pueden hacer DESENCIPTAR
+desencriptarCesar::String->Int->String
+desencriptarCesar s n = codigoCesar s (-n)
+
+---------------------------------------------
+---------------------------------------------
+
+cifrarVigeneAux::String->String->Int->String
+cifrarVigeneAux [] _ _ = []
+cifrarVigeneAux _ [] _ = []
+cifrarVigeneAux (x:xs) y i
+ |elem x ['a'..'z'] =  devPos ['a'..'z'] (mod (pos ['a'..'z'] x - pos ['a'..'z'] (devPos y (mod i (length y)))) 26) : cifrarVigeneAux xs y (i+1)
+ |otherwise = x : cifrarVigeneAux xs y i

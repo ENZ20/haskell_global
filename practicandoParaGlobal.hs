@@ -221,7 +221,20 @@ cifrar clave mensaje = cifrarRecursivo mensaje
 
 -- 4. Devuelve el mensaje original.
 --descifrar :: String -> String -> String
---descifrar = undefined
+descifrar :: String -> String -> String
+descifrar clave mensaje = descifrarRecursivo mensaje
+    where
+        alfabetoIngles = ['A'..'Z']
+        alfabetoClave  = alfabetoCifrado clave 
+
+        descifrarRecursivo :: String -> String
+        descifrarRecursivo [] = []
+        descifrarRecursivo (x:xs)
+            -- 1. Preguntamos si la letra existe en el alfabeto CIFRADO
+            | elem x alfabetoClave = (alfabetoIngles !! buscarPosicion x alfabetoClave) : descifrarRecursivo xs
+            -- 2. Si no es letra, la dejamos igual
+            | otherwise            = x : descifrarRecursivo xs
+
 
 --CODIGO CESAR
 alfabetoMin :: String
@@ -230,21 +243,26 @@ alfabetoMin = ['a'..'z']
 alfabetoMayu :: String
 alfabetoMayu = ['A'..'Z']
 
-devuelvePos :: String -> Char -> Int -- "HOLA" L -> 2
+devuelvePos :: String -> Char -> Int 
 devuelvePos (x:xs) letra
     | x == letra = 1
     | otherwise  = 1 + devuelvePos xs letra
 
-desplazar2 :: Char -> Int -> Char
+desplazar2 :: Char -> Int -> Char   
 desplazar2 letra numDesplazamiento
-    |elem letra alfabetoMin = alfabetoMin  !! (mod (devuelvePos alfabetoMin  letra + numDesplazamiento) 26)
-    |elem letra alfabetoMayu= alfabetoMayu !! (mod (devuelvePos alfabetoMayu letra + numDesplazamiento) 26)
-    |otherwise = letra
+    -- RESTAMOS 1 aqui para corregir el desfasaje entre devuelvePos (base 1) y !! (base 0)
+    | elem letra alfabetoMin = alfabetoMin  !! (mod (devuelvePos alfabetoMin  letra - 1 + numDesplazamiento) 26)
+    | elem letra alfabetoMayu= alfabetoMayu !! (mod (devuelvePos alfabetoMayu letra - 1 + numDesplazamiento) 26)
+    | otherwise = letra
 
 codificacionCesarDerecha :: String -> Int -> String
 codificacionCesarDerecha [] _ = []
 codificacionCesarDerecha (x:xs) n = desplazar2 x n : codificacionCesarDerecha xs n
 
+-- Esta funcion ahora es redundante porque descifrar hace lo mismo, pero la dejamos corregida:
 codificacionCesarIzquierda :: String -> Int -> String
-codificacionCesarIzquierda [] _ = []
-codificacionCesarIzquierda (x:xs) n = codificacionCesarDerecha xs (-n)
+codificacionCesarIzquierda lista n = codificacionCesarDerecha lista (-n)
+
+-- TU NUEVA FUNCIÓN DESCIFRAR
+descifrarCesar :: String -> Int -> String
+descifrarCesar mensaje n = codificacionCesarDerecha mensaje (-n)
