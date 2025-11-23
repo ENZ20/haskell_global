@@ -1,5 +1,6 @@
 import Data.Char (toLower)
 
+
 siguiente:: Int -> Int --Pattern Matching
 siguiente a = a + 1
 
@@ -222,4 +223,28 @@ cifrar clave mensaje = cifrarRecursivo mensaje
 --descifrar :: String -> String -> String
 --descifrar = undefined
 
+--CODIGO CESAR
+alfabetoMin :: String
+alfabetoMin = ['a'..'z']
 
+alfabetoMayu :: String
+alfabetoMayu = ['A'..'Z']
+
+devuelvePos :: String -> Char -> Int -- "HOLA" L -> 2
+devuelvePos (x:xs) letra
+    | x == letra = 1
+    | otherwise  = 1 + devuelvePos xs letra
+
+desplazar2 :: Char -> Int -> Char
+desplazar2 letra numDesplazamiento
+    |elem letra alfabetoMin = alfabetoMin !! (mod (devuelvePos alfabetoMin  letra + numDesplazamiento) 26)
+    |elem letra alfabetoMin = alfabetoMin !! (mod (devuelvePos alfabetoMayu letra + numDesplazamiento) 26)
+    |otherwise = letra
+
+codificacionCesarDerecha :: String -> Int -> String
+codificacionCesarDerecha [] _ = []
+codificacionCesarDerecha (x:xs) n = desplazar2 x n : codificacionCesarDerecha xs n
+
+codificacionCesarIzquierda :: String -> Int -> String
+codificacionCesarIzquierda [] _ = []
+codificacionCesarIzquierda (x:xs) n = codificacionCesarDerecha xs (-n)
