@@ -206,3 +206,5 @@ codMurcielago (x:xs)
  |toLower x == 'g' = '8':codMurcielago xs
  |toLower x == 'o' = '9':codMurcielago xs
  |otherwise = x:codMurcielago xs
+
+ 
