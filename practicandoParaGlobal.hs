@@ -237,8 +237,8 @@ devuelvePos (x:xs) letra
 
 desplazar2 :: Char -> Int -> Char
 desplazar2 letra numDesplazamiento
-    |elem letra alfabetoMin = alfabetoMin !! (mod (devuelvePos alfabetoMin  letra + numDesplazamiento) 26)
-    |elem letra alfabetoMin = alfabetoMin !! (mod (devuelvePos alfabetoMayu letra + numDesplazamiento) 26)
+    |elem letra alfabetoMin = alfabetoMin  !! (mod (devuelvePos alfabetoMin  letra + numDesplazamiento) 26)
+    |elem letra alfabetoMayu= alfabetoMayu !! (mod (devuelvePos alfabetoMayu letra + numDesplazamiento) 26)
     |otherwise = letra
 
 codificacionCesarDerecha :: String -> Int -> String
