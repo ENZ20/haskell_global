@@ -236,7 +236,7 @@ descifrar clave mensaje = descifrarRecursivo mensaje
             | otherwise            = x : descifrarRecursivo xs
 
 
---CODIGO CESAR
+-------------------------CODIGO CESAR
 alfabetoMin :: String
 alfabetoMin = ['a'..'z']
 
@@ -259,10 +259,23 @@ codificacionCesarDerecha :: String -> Int -> String
 codificacionCesarDerecha [] _ = []
 codificacionCesarDerecha (x:xs) n = desplazar2 x n : codificacionCesarDerecha xs n
 
--- Esta funcion ahora es redundante porque descifrar hace lo mismo, pero la dejamos corregida:
 codificacionCesarIzquierda :: String -> Int -> String
 codificacionCesarIzquierda lista n = codificacionCesarDerecha lista (-n)
 
 -- TU NUEVA FUNCIÓN DESCIFRAR
 descifrarCesar :: String -> Int -> String
 descifrarCesar mensaje n = codificacionCesarDerecha mensaje (-n)
+
+--ejercicio de GLOBAL
+
+--1 proponga y justifique una representacion de datos que permita definir polinomios en HASKELL
+type Polinomio =  [Float]
+
+-- Ejemplo: 4x^3 + 2x + 1
+miPoli :: Polinomio
+miPoli = [1.0, 2.0, 0.0, 4.0]
+
+--evaluar Polinomio -> numeroAEvaluar -> Resultado
+evaluar :: Polinomio -> Float -> Float
+evaluar [] _ = 0
+evaluar (c:cs) x = c + x * evaluar cs x
