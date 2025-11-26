@@ -279,3 +279,12 @@ miPoli = [1.0, 2.0, 0.0, 4.0]
 evaluar :: Polinomio -> Float -> Float
 evaluar [] _ = 0
 evaluar (c:cs) x = c + x * evaluar cs x
+
+grado :: Polinomio -> Int
+grado [] = -1
+grado (_:xs)  = 1 + grado xs
+
+sumar :: Polinomio -> Polinomio -> Polinomio
+sumar [] ys = ys
+sumar xs [] = xs
+sumar (x:xs) (y:ys) = x + y : sumar xs ys
