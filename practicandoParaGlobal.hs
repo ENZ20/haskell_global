@@ -333,7 +333,7 @@ obtenerColumna m c = map (!! c) m
 
 sumaDiagonal :: [[Int]] -> Int
 sumaDiagonal m = sumaAux m 0
-where
+  where
     sumaAux :: [[Int]] -> Int -> Int
     sumaAux [] _ = 0
-    sumaAux (x : xs) i = (x !! i) + sumaAux x (i+1)
+    sumaAux (x : xs) i = (x !! i) + sumaAux xs (i+1)
