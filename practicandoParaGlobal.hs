@@ -319,3 +319,21 @@ codMurcielago (x:xs)
     | x == 'g' || x == 'G' = '8' : codMurcielago xs
     | x == 'o' || x == 'O' = '9' : codMurcielago xs
     | otherwise            = x   : codMurcielago xs -- Si no es ninguna, queda igual
+
+
+-- ejercicios de MATRICES
+--type Matriz = [[Int]]
+
+esCuadrada :: [[Int]] -> Bool
+esCuadrada [] = True
+esCuadrada (x:xs) = (length xs + 1) == length x
+
+obtenerColumna :: [[Int]] -> Int -> [Int]
+obtenerColumna m c = map (!! c) m
+
+sumaDiagonal :: [[Int]] -> Int
+sumaDiagonal m = sumaAux m 0
+where
+    sumaAux :: [[Int]] -> Int -> Int
+    sumaAux [] _ = 0
+    sumaAux (x : xs) i = (x !! i) + sumaAux x (i+1)
