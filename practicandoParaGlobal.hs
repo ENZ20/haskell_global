@@ -302,3 +302,20 @@ limpiar :: String -> String -> String
 limpiar :: String -> String -> String
 limpiar [] ys = ys
 limpiar (x:xs) ys = limpiar xs (filter(/= x) ys)
+
+codMurcielago :: String -> String
+codMurcielago [] = []  -- Caso base: Cadena vacía
+codMurcielago (x:xs)
+    -- Chequeamos letra por letra (M=0, U=1, R=2...)
+    -- Aceptamos mayúsculas o minúsculas para que sea robusto
+    | x == 'm' || x == 'M' = '0' : codMurcielago xs
+    | x == 'u' || x == 'U' = '1' : codMurcielago xs
+    | x == 'r' || x == 'R' = '2' : codMurcielago xs
+    | x == 'c' || x == 'C' = '3' : codMurcielago xs
+    | x == 'i' || x == 'I' = '4' : codMurcielago xs
+    | x == 'e' || x == 'E' = '5' : codMurcielago xs
+    | x == 'l' || x == 'L' = '6' : codMurcielago xs
+    | x == 'a' || x == 'A' = '7' : codMurcielago xs
+    | x == 'g' || x == 'G' = '8' : codMurcielago xs
+    | x == 'o' || x == 'O' = '9' : codMurcielago xs
+    | otherwise            = x   : codMurcielago xs -- Si no es ninguna, queda igual
