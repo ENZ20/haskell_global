@@ -251,8 +251,11 @@ devuelvePos (x:xs) letra
 desplazar2 :: Char -> Int -> Char   
 desplazar2 letra numDesplazamiento
     -- RESTAMOS 1 aqui para corregir el desfasaje entre devuelvePos (base 1) y !! (base 0)
-    | elem letra alfabetoMin = alfabetoMin  !! (mod (devuelvePos alfabetoMin  letra - 1 + numDesplazamiento) 26)
-    | elem letra alfabetoMayu= alfabetoMayu !! (mod (devuelvePos alfabetoMayu letra - 1 + numDesplazamiento) 26)
+    --elem pregunta si letra pertenece a alfabetoMin
+    -- !! es como un indice  "lista !! pos" ['a', 'b', 'c', 'd'] !! 2  -- Devuelve 'c' "HOLA" !! 1  -- Devuelve 'O'
+
+    | elem letra alfabetoMin = alfabetoMin  !! (mod (devuelvePos alfabetoMin  letra  + numDesplazamiento) 26-1)
+    | elem letra alfabetoMayu= alfabetoMayu !! (mod (devuelvePos alfabetoMayu letra  + numDesplazamiento) 26-1)
     | otherwise = letra
 
 codificacionCesarDerecha :: String -> Int -> String
@@ -281,10 +284,21 @@ evaluar [] _ = 0
 evaluar (c:cs) x = c + x * evaluar cs x
 
 grado :: Polinomio -> Int
-grado [] = -1
+grado [] = -1 -- -1 porque no se cuenta el grado cero
 grado (_:xs)  = 1 + grado xs
 
 sumar :: Polinomio -> Polinomio -> Polinomio
 sumar [] ys = ys
 sumar xs [] = xs
 sumar (x:xs) (y:ys) = x + y : sumar xs ys
+
+{-
+2) Eliminar todas las apariciones de cualquier carácter de la primera cadena en la segunda. 
+
+limpiar :: String -> String -> String
+-- ejemplo: limpiar “susto” “puerta” => “pera”
+-}
+
+limpiar :: String -> String -> String
+limpiar [] ys = ys
+limpiar (x:xs) ys = limpiar xs (filter(/= x) ys)
