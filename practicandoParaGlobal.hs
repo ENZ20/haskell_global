@@ -337,3 +337,9 @@ sumaDiagonal m = sumaAux m 0
     sumaAux :: [[Int]] -> Int -> Int
     sumaAux [] _ = 0
     sumaAux (x : xs) i = (x !! i) + sumaAux xs (i+1)
+
+--ejercicio para recordar como usar WHERE
+calculoLindo :: Int -> Int -> Int
+calculoLindo a b = a * b + 10
+    where
+        suma = a + b
